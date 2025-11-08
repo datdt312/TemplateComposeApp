@@ -63,4 +63,7 @@ dependencies {
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.bundles.testing)
+
+    // Coil
+    implementation(libs.bundles.coil)
 }

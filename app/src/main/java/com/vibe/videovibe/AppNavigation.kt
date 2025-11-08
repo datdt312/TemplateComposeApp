@@ -1,13 +1,13 @@
 package com.vibe.videovibe
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.vibe.videovibe.components.BaseScreen
+import com.vibe.videovibe.screens.home.HomeScreen
 
 
 sealed class Screen(val route: String) {
@@ -15,18 +15,17 @@ sealed class Screen(val route: String) {
     object Setting : Screen("Setting")
 }
 
-enum class AppRoute(
-    val label: String,
-    val icon: ImageVector,
-) {
-    HOME("Home", Icons.Default.Home),
-    FAVORITES("Favorites", Icons.Default.Favorite),
-    PROFILE("Profile", Icons.Default.AccountBox),
-}
-
 @Composable
 fun AppNavigation(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
     BaseScreen {
-
+        NavHost(navController = navController, startDestination = Screen.Home.route) {
+            composable(Screen.Home.route) {
+                HomeScreen()
+            }
+            composable(Screen.Setting.route) {
+                HomeScreen()
+            }
+        }
     }
 }
